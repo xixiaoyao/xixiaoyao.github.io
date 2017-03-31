@@ -371,17 +371,17 @@ $$h_{\theta}(x)=sigmoid(\theta\cdot x)$$
 <p>（小夕要讲大事，忽略偏置项参数和向量转置这种细节啦）,其中sigmoid函数的图像看起来是这样的：</p>
 <a id="more"></a>
 <p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg" alt=""></p>
-<p>因此，我们将$h<em>{\theta}(x)&gt;0.5$的样本预测为正类别（记为类别1），将$h</em>{\theta}(x)&lt;0.5$的样本预测为负类别（记为类别0）。因此对于sigmoid(z)函数来说，z=0的点就是用来分类的临界点。所以在逻辑回归中，$\theta\cdot x=0$的点就是分类的临界点。</p>
+<p>因此，我们将$h_{\theta}(x)&gt;0.5$的样本预测为正类别（记为类别1），将$h_{\theta}(x)&lt;0.5$的样本预测为负类别（记为类别0）。因此对于sigmoid(z)函数来说，z=0的点就是用来分类的临界点。所以在逻辑回归中，$\theta\cdot x=0$的点就是分类的临界点。</p>
 <p>可是你有想过为什么吗？（是的，这并不是拍脑袋决定的）</p>
 <p>如果觉得小夕的这种问法很奇怪，那小夕换一种问法，你知道$\theta\cdot x$是代表什么意思吗？它难道仅仅代表了“特征向量与模型参数做内积”这么肤浅的含义吗？</p>
 <p>听小夕慢慢讲，手指慢慢划，跟上思路哦。</p>
 <p>首先，模型参数$\theta$是个向量，维数与样本的维数一致（忽略偏置项这种细节问题啦）,为了好看，<strong>下文用w来代替$\theta$</strong>。</p>
-<p>我们来好好看看这个所谓的模型参数w。这个w在本质上是$w<em>{y=1}-w</em>{y=0}$，记为$\Delta w$。诶？怎么能这样呢？如何理解被拆出来的这两个w呢？</p>
-<p>其实只要把$w<em>{y=1}$这个向量看作是对类别1的<strong>直接描述</strong>，将向量$w</em>{y=1}$看作是对类别0的直接描述，新的大门就打开了。还记得前面小夕讲的，在逻辑回归模型中，本质上用来预测类别的临界点就是$\theta\cdot x$，也就是$w_1\cdot x-w_0\cdot x$，这代表什么意思呢？</p>
+<p>我们来好好看看这个所谓的模型参数w。这个w在本质上是$w_{y=1}-w_{y=0}$，记为$\Delta w$。诶？怎么能这样呢？如何理解被拆出来的这两个w呢？</p>
+<p>其实只要把$w_{y=1}$这个向量看作是对类别1的<strong>直接描述</strong>，将向量$w_{y=1}$看作是对类别0的直接描述，新的大门就打开了。还记得前面小夕讲的，在逻辑回归模型中，本质上用来预测类别的临界点就是$\theta\cdot x$，也就是$w_1\cdot x-w_0\cdot x$，这代表什么意思呢？</p>
 <blockquote>
 <p>我们知道，对于向量a和向量b，假设它们的长度都为1，那么当向量a与向量b夹角最小时，它们的内积，也就是$a\cdot b$会最大。当然了，推广到更一般的说法，不限制a与b的长度，则当a与b夹角最小时，我们称a与b的余弦相似度最大</p>
 </blockquote>
-<p>而两向量的夹角越小意味着什么呢？意味着这两个向量越相似呀，意味着越亲密呀。所以$w_1x-w<em>0x$就意味着类别1与特征向量x的亲密度减去类别0与x的亲密度。因此当逻辑回归的假设函数$h</em>\theta(x)&gt;0.5$时，也就是$w\cdot x&gt;0$时，就代表着特征向量x，也就是样本，与类别1更亲密，因此类别预测为1。同样的道理，当x与类别0更亲密时，类别预测为0。</p>
+<p>而两向量的夹角越小意味着什么呢？意味着这两个向量越相似呀，意味着越亲密呀。所以$w_1x-w_0x$就意味着类别1与特征向量x的亲密度减去类别0与x的亲密度。因此当逻辑回归的假设函数$h_\theta(x)&gt;0.5$时，也就是$w\cdot x&gt;0$时，就代表着特征向量x，也就是样本，与类别1更亲密，因此类别预测为1。同样的道理，当x与类别0更亲密时，类别预测为0。</p>
 <p>继续，我们将上述神奇的逻辑放到逻辑回归模型的假设函数$h_\theta(x)$的展开式中，将$\theta$替换为我们上面的$\Delta w$，得：</p>
 <p>$h_\theta(x)=\frac{e^{\Delta w\cdot x}}{1+e^{\Delta w\cdot x}}$</p>
 <p>等等，有没有惊恐的发现什么？还记得小夕在上一篇文章《逻辑回归》中得到的这个结论吗？：</p>
@@ -389,7 +389,7 @@ $$h_{\theta}(x)=sigmoid(\theta\cdot x)$$
 <p><img src="https://ww1.sinaimg.cn/large/006tNc79ly1fe56ggqur9j30ku0kw3zu.jpg" alt=""></p>
 </blockquote>
 <p>天呐，逻辑回归的假设函数竟然与P(Y=1|X)一模一样！都是$sigmoid(\Delta w\cdot x)$！！这个sigmoid函数到底是什么？一切真的都是因为巧合吗？不行，小夕非要一探究竟！来，手术刀拿来，解剖！</p>
-<h1 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h1><p>为了美观，我们直接用$w1$代替$w<em>{y=1}$，用$w0$代替$w</em>{y=0}$</p>
+<h1 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h1><p>为了美观，我们直接用$w1$代替$w_{y=1}$，用$w0$代替$w_{y=0}$</p>
 <p>$sigmoid(\Delta w\cdot x)=\frac{e^{\Delta w\cdot x}}{1+e^{\Delta w\cdot x}}=\frac{e^{(w1-w0)\cdot x}}{e^{(w0-w0)\cdot x}+e^{(w1-w0)\cdot x}}$</p>
 <p>如果我们令分子分母同除以$e^{-w0\cdot x}$。。。得：</p>
 <p>$sigmoid(\Delta w\cdot x)=\frac{e^{w1\cdot x}}{e^{w0\cdot x}+e^{w1\cdot x}}$</p>
