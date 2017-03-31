@@ -1,0 +1,903 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="缘起逻辑回归逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。
+我们知道，在逻辑回归中，用于预测样本类别的假设函数为
+$$h_{\theta}(x)=sigmoid(\theta\cdot x)$$
+（小夕要讲大事，忽略偏置项参数和向量转置这种细节啦）,其中sigmoid函数的图像看起来是这样的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="夕小瑶的科技屋">
+<meta property="og:url" content="http://xixiaoyao.github.io/2017/03/31/深入深出Sigmoid与Softmax的血缘关系副本/index.html">
+<meta property="og:site_name" content="夕小瑶的科技屋">
+<meta property="og:description" content="缘起逻辑回归逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。
+我们知道，在逻辑回归中，用于预测样本类别的假设函数为
+$$h_{\theta}(x)=sigmoid(\theta\cdot x)$$
+（小夕要讲大事，忽略偏置项参数和向量转置这种细节啦）,其中sigmoid函数的图像看起来是这样的">
+<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79ly1fe56ggqur9j30ku0kw3zu.jpg">
+<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1fe57zn7m0zj306n01wwej.jpg">
+<meta property="og:updated_time" content="2017-03-31T07:20:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="夕小瑶的科技屋">
+<meta name="twitter:description" content="缘起逻辑回归逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。
+我们知道，在逻辑回归中，用于预测样本类别的假设函数为
+$$h_{\theta}(x)=sigmoid(\theta\cdot x)$$
+（小夕要讲大事，忽略偏置项参数和向量转置这种细节啦）,其中sigmoid函数的图像看起来是这样的">
+<meta name="twitter:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xixiaoyao.github.io/2017/03/31/深入深出Sigmoid与Softmax的血缘关系副本/"/>
+
+
+
+
+
+  <title>  | 夕小瑶的科技屋 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">夕小瑶的科技屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            类别
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            夕小瑶
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            时间线
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://xixiaoyao.github.io/2017/03/31/深入深出Sigmoid与Softmax的血缘关系副本/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夕小瑶">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/baobao.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="夕小瑶的科技屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T15:18:34+08:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/03/31/深入深出Sigmoid与Softmax的血缘关系副本/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="缘起逻辑回归"><a href="#缘起逻辑回归" class="headerlink" title="缘起逻辑回归"></a>缘起逻辑回归</h1><p>逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。</p>
+<p>我们知道，在逻辑回归中，用于预测样本类别的假设函数为</p>
+<p>$$h_{\theta}(x)=sigmoid(\theta\cdot x)$$</p>
+<p>（小夕要讲大事，忽略偏置项参数和向量转置这种细节啦）,其中sigmoid函数的图像看起来是这样的：</p>
+<a id="more"></a>
+<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg" alt=""></p>
+<p>因此，我们将$h<em>{\theta}(x)&gt;0.5$的样本预测为正类别（记为类别1），将$h</em>{\theta}(x)&lt;0.5$的样本预测为负类别（记为类别0）。因此对于sigmoid(z)函数来说，z=0的点就是用来分类的临界点。所以在逻辑回归中，$\theta\cdot x=0$的点就是分类的临界点。</p>
+<p>可是你有想过为什么吗？（是的，这并不是拍脑袋决定的）</p>
+<p>如果觉得小夕的这种问法很奇怪，那小夕换一种问法，你知道$\theta\cdot x$是代表什么意思吗？它难道仅仅代表了“特征向量与模型参数做内积”这么肤浅的含义吗？</p>
+<p>听小夕慢慢讲，手指慢慢划，跟上思路哦。</p>
+<p>首先，模型参数$\theta$是个向量，维数与样本的维数一致（忽略偏置项这种细节问题啦）,为了好看，<strong>下文用w来代替$\theta$</strong>。</p>
+<p>我们来好好看看这个所谓的模型参数w。这个w在本质上是$w<em>{y=1}-w</em>{y=0}$，记为$\Delta w$。诶？怎么能这样呢？如何理解被拆出来的这两个w呢？</p>
+<p>其实只要把$w<em>{y=1}$这个向量看作是对类别1的<strong>直接描述</strong>，将向量$w</em>{y=1}$看作是对类别0的直接描述，新的大门就打开了。还记得前面小夕讲的，在逻辑回归模型中，本质上用来预测类别的临界点就是$\theta\cdot x$，也就是$w_1\cdot x-w_0\cdot x$，这代表什么意思呢？</p>
+<blockquote>
+<p>我们知道，对于向量a和向量b，假设它们的长度都为1，那么当向量a与向量b夹角最小时，它们的内积，也就是$a\cdot b$会最大。当然了，推广到更一般的说法，不限制a与b的长度，则当a与b夹角最小时，我们称a与b的余弦相似度最大</p>
+</blockquote>
+<p>而两向量的夹角越小意味着什么呢？意味着这两个向量越相似呀，意味着越亲密呀。所以$w_1x-w<em>0x$就意味着类别1与特征向量x的亲密度减去类别0与x的亲密度。因此当逻辑回归的假设函数$h</em>\theta(x)&gt;0.5$时，也就是$w\cdot x&gt;0$时，就代表着特征向量x，也就是样本，与类别1更亲密，因此类别预测为1。同样的道理，当x与类别0更亲密时，类别预测为0。</p>
+<p>继续，我们将上述神奇的逻辑放到逻辑回归模型的假设函数$h_\theta(x)$的展开式中，将$\theta$替换为我们上面的$\Delta w$，得：</p>
+<p>$h_\theta(x)=\frac{e^{\Delta w\cdot x}}{1+e^{\Delta w\cdot x}}$</p>
+<p>等等，有没有惊恐的发现什么？还记得小夕在上一篇文章《逻辑回归》中得到的这个结论吗？：</p>
+<blockquote>
+<p><img src="https://ww1.sinaimg.cn/large/006tNc79ly1fe56ggqur9j30ku0kw3zu.jpg" alt=""></p>
+</blockquote>
+<p>天呐，逻辑回归的假设函数竟然与P(Y=1|X)一模一样！都是$sigmoid(\Delta w\cdot x)$！！这个sigmoid函数到底是什么？一切真的都是因为巧合吗？不行，小夕非要一探究竟！来，手术刀拿来，解剖！</p>
+<h1 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h1><p>为了美观，我们直接用$w1$代替$w<em>{y=1}$，用$w0$代替$w</em>{y=0}$</p>
+<p>$sigmoid(\Delta w\cdot x)=\frac{e^{\Delta w\cdot x}}{1+e^{\Delta w\cdot x}}=\frac{e^{(w1-w0)\cdot x}}{e^{(w0-w0)\cdot x}+e^{(w1-w0)\cdot x}}$</p>
+<p>如果我们令分子分母同除以$e^{-w0\cdot x}$。。。得：</p>
+<p>$sigmoid(\Delta w\cdot x)=\frac{e^{w1\cdot x}}{e^{w0\cdot x}+e^{w1\cdot x}}$</p>
+<p>！！！有没有被震惊到！小夕在前面讲了，w1与x的内积代表着w1与x的亲密度，这个不就代表着<strong>“类别1与x的亲密度 占 x与所有类别亲密度之和 的比例”</strong>吗？既然是比例，那肯定是0到1之间的数呀~而这个比例又可以解读为什么呢？不就是类别1在x心中的分量吗？当类别1在x心中的分量超过类别0在x心中的分量时，我们的逻辑回归模型当然要把类别1嫁给x呀~也就是将类别1作为预测的类别！同时，这个分量越大，我们将类别1嫁给x后，会让x满意的概率就越大！所以这个比例又是类别1的后验概率P(y=1|x<br>)呀！</p>
+<p>一切都不是巧合吧。Sigmoid函数的意义，竟然如此深邃。等等，虽然sigmoid(w1·x)代表”类别1与x的亲密度占x与所有类别亲密度之和的比例”，但是显然这里只有两个类别，即1和0，也就是说Sigmoid是一个只能用于<strong>二类分类</strong>的函数，那么如果我们要分类的类别超过2，我们能不能同样用一个函数来表示出“某类别与x的亲密度占x与所有类别亲密度之和的比例”呢？</p>
+<h1 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h1><p>这一次，我们倒着来！假如我们的分类任务有k个类别，与前面用w1、w0来表示类别1、类别2一样，我们用w1、w2、w3…wk来表示各个类别。</p>
+<p>根据前面的经验，这个“类别j与特征向量x的亲密度”貌似可以表示为$e^{wj\cdot x}$，那么我们效仿一下sigmoid，类别j与x的亲密度占x与所有类别亲密度之和的比例即:</p>
+<p>$\frac{e^{wj\cdot x}}{e^{w1\cdot x}+e^{w2\cdot x}+e^{w3\cdot x}+…+e^{wk\cdot x}}$</p>
+<p>将分母用$\sum$整理一下，发现了没有！这就是大名鼎鼎的Softmax函数：</p>
+<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1fe57zn7m0zj306n01wwej.jpg" alt=""></p>
+<p>哎，原来看似深不可测的Softmax函数，也就这样啦╮(╯▽╰)╭怪小夕咯？</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode.png" alt="夕小瑶 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>查看更多文章。欢迎关注小夕的微信订阅号(夕小瑶的卖萌屋)~</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>蟹蟹你O(∩_∩)O</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/pay.png" alt="夕小瑶 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/31/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/31/深入深出Sigmoid与Softmax的血缘关系副本 2/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            喵喵喵
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/baobao.png"
+               alt="夕小瑶" />
+          <p class="site-author-name" itemprop="name">夕小瑶</p>
+           
+              <p class="site-description motion-element" itemprop="description">要学习，要抱抱，要美美哒。</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缘起逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">缘起逻辑回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sigmoid"><span class="nav-number">2.</span> <span class="nav-text">Sigmoid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Softmax"><span class="nav-number">3.</span> <span class="nav-text">Softmax</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夕小瑶</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("HUjKBEHkyaPQ1RJIBUwOYoEd-gzGzoHsz", "fhdBdvSHFWEDS1ORSxR1t9tG");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+</body>
+</html>
