@@ -87,23 +87,19 @@
 
 
 
-<meta name="description" content="12本文摘要：其实，这是关于Adaboost的一个故事。。。">
+<meta name="description" content="本文摘要：其实，这是关于Adaboost的一个故事。。。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一位老师，一位领导，一个让全体学生考上目标学校的故事">
 <meta property="og:url" content="http://xixiaoyao.github.io/2017/04/03/ateacher/index.html">
 <meta property="og:site_name" content="夕小瑶的科技屋">
-<meta property="og:description" content="12本文摘要：其实，这是关于Adaboost的一个故事。。。">
+<meta property="og:description" content="本文摘要：其实，这是关于Adaboost的一个故事。。。">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
-<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image005.png">
-<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image007.png">
-<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image009.png">
-<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image010.png">
 <meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
-<meta property="og:updated_time" content="2017-04-03T16:19:24.000Z">
+<meta property="og:updated_time" content="2017-04-03T16:54:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一位老师，一位领导，一个让全体学生考上目标学校的故事">
-<meta name="twitter:description" content="12本文摘要：其实，这是关于Adaboost的一个故事。。。">
+<meta name="twitter:description" content="本文摘要：其实，这是关于Adaboost的一个故事。。。">
 <meta name="twitter:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
 
 
@@ -393,9 +389,11 @@
       
 
       
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">本文摘要：</div><div class="line">其实，这是关于Adaboost的一个故事。。。</div></pre></td></tr></table></figure>
+        <p>本文摘要：<br>其实，这是关于Adaboost的一个故事。。。</p>
 <a id="more"></a>
-<p><u>声明：用于个人学习的转载无需告知，<strong>但请务必在文首注明出处！</strong>微信公众号、微博等平台的<strong>商业转载</strong>请务必联系本文作者<a href="https://xixiaoyao.github.io/about/">夕小瑶</a>。</u></p>
+<hr>
+<p><strong>声明：</strong>用于个人学习的转载无需告知，<strong>但请务必在文首注明出处！</strong>微信公众号、微博等平台的<strong>商业转载</strong>请务必联系本文作者<a href="https://xixiaoyao.github.io/about/">夕小瑶</a>。</p>
+<hr>
 <p>今天，小夕给大家讲一个故事…</p>
 <p><img src="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg" alt=""></p>
 <p>从前，有座山… </p>
@@ -428,10 +426,10 @@
 <p> 怎么把上面的故事转成Adaboost算法呢？完成下面的概念替换：</p>
 <p> 下面映射的是算法中的实体（变量） </p>
 <ul>
-<li>每个有目标的学生 -&gt; 一个训练样本<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image005.png" alt="_{train}"></li>
+<li>每个有目标的学生 -&gt; 一个训练样本$x_{train}$</li>
 </ul>
 <ul>
-<li>没有考试目标的学生 -&gt; 待分类样本<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image007.png" alt="_{test}"></li>
+<li>没有考试目标的学生 -&gt; 待分类样本$x_{test}$</li>
 </ul>
 <ul>
 <li>清华、浙大 -&gt; 本任务的两个类别</li>
@@ -446,7 +444,7 @@
 <li>老师计算的每场考试的成功率 -&gt; 训练样本集的加权错误率</li>
 </ul>
 <ul>
-<li>上级领导给每个考试卷打的分数 -&gt; 每个弱分类器的决策权重<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image009.png" alt="alpha"></li>
+<li>上级领导给每个考试卷打的分数 -&gt; 每个弱分类器的决策权重$\alpha$</li>
 </ul>
 <ul>
 <li>经过的天数 -&gt; 弱分类器的数量</li>
@@ -462,7 +460,7 @@
 </ol>
 </li>
 <li><ol>
-<li>上级领导给考试卷打分的过程 -&gt; 计算当前这个弱分类器的决策权重<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image010.png" alt="alpha"></li>
+<li>上级领导给考试卷打分的过程 -&gt; 计算当前这个弱分类器的决策权重$\alpha$</li>
 </ol>
 </li>
 <li><ol>
