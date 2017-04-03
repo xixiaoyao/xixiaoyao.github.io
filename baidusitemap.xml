@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://xixiaoyao.github.io/2017/04/03/ateacher/</loc>
+    <lastmod>2017-04-03T16:19:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>一位老师，一位领导，一个让全体学生考上目标学校的故事</title>
+        <pubTime>2017-04-03T14:32:21.000Z</pubTime>
+        
+        <tag>Adaboost</tag>
+         
+        <tag>机器学习</tag>
+         
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://xixiaoyao.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+             
+              <breadCrumb title="机器学习" url="http://xixiaoyao.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xixiaoyao.github.io/2017/03/31/sigmoid-and-softmax/</loc>
+    <lastmod>2017-04-03T16:19:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>深入深出Sigmoid与Softmax的血缘关系</title>
+        <pubTime>2017-03-31T12:55:51.000Z</pubTime>
+        
+        <tag>机器学习</tag>
+         
+        <tag>逻辑回归</tag>
+         
+        <tag>softmax</tag>
+         
+        <tag>sigmoid</tag>
+         
+         
+           
+             
+              <breadCrumb title="人工智能" url="http://xixiaoyao.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+          
+             
+              <breadCrumb title="机器学习" url="http://xixiaoyao.github.io/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+  <url>
+    <loc>http://xixiaoyao.github.io/2017/03/31/hello-world/</loc>
+    <lastmod>2017-03-31T03:51:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-03-31T03:51:59.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>

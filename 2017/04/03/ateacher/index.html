@@ -71,7 +71,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="机器学习,逻辑回归,softmax,sigmoid," />
+  <meta name="keywords" content="Adaboost,机器学习," />
 
 
 
@@ -87,20 +87,24 @@
 
 
 
-<meta name="description" content="缘起逻辑回归逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。">
+<meta name="description" content="12本文摘要：其实，这是关于Adaboost的一个故事。。。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入伸出Sigmoid与Softmax的血缘关系">
-<meta property="og:url" content="http://xixiaoyao.github.io/2017/03/31/sigmoid-and-softmax副本/index.html">
+<meta property="og:title" content="一位老师，一位领导，一个让全体学生考上目标学校的故事">
+<meta property="og:url" content="http://xixiaoyao.github.io/2017/04/03/ateacher/index.html">
 <meta property="og:site_name" content="夕小瑶的科技屋">
-<meta property="og:description" content="缘起逻辑回归逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。">
-<meta property="og:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg">
-<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNc79ly1fe56ggqur9j30ku0kw3zu.jpg">
-<meta property="og:image" content="https://ww4.sinaimg.cn/large/006tNc79ly1fe57zn7m0zj306n01wwej.jpg">
-<meta property="og:updated_time" content="2017-03-31T13:54:26.000Z">
+<meta property="og:description" content="12本文摘要：其实，这是关于Adaboost的一个故事。。。">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
+<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image005.png">
+<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image007.png">
+<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image009.png">
+<meta property="og:image" content="http://xixiaoyao.github.io/file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image010.png">
+<meta property="og:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
+<meta property="og:updated_time" content="2017-04-03T16:19:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入伸出Sigmoid与Softmax的血缘关系">
-<meta name="twitter:description" content="缘起逻辑回归逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。">
-<meta name="twitter:image" content="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg">
+<meta name="twitter:title" content="一位老师，一位领导，一个让全体学生考上目标学校的故事">
+<meta name="twitter:description" content="12本文摘要：其实，这是关于Adaboost的一个故事。。。">
+<meta name="twitter:image" content="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg">
 
 
 
@@ -128,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://xixiaoyao.github.io/2017/03/31/sigmoid-and-softmax副本/"/>
+  <link rel="canonical" href="http://xixiaoyao.github.io/2017/04/03/ateacher/"/>
 
 
 
 
 
-  <title> 深入伸出Sigmoid与Softmax的血缘关系 | 夕小瑶的科技屋 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 一位老师，一位领导，一个让全体学生考上目标学校的故事 | 夕小瑶的科技屋 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -273,7 +277,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://xixiaoyao.github.io/2017/03/31/sigmoid-and-softmax副本/">
+    <link itemprop="mainEntityOfPage" href="http://xixiaoyao.github.io/2017/04/03/ateacher/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xiaoyao Xi">
@@ -294,7 +298,7 @@
             
             
               
-                深入伸出Sigmoid与Softmax的血缘关系
+                一位老师，一位领导，一个让全体学生考上目标学校的故事
               
             
           </h1>
@@ -309,8 +313,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-31T20:55:51+08:00">
-                2017-03-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-03T22:32:21+08:00">
+                2017-04-03
               </time>
             
 
@@ -320,6 +324,39 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/人工智能/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -327,7 +364,7 @@
 
           
           
-             <span id="/2017/03/31/sigmoid-and-softmax副本/" class="leancloud_visitors" data-flag-title="深入伸出Sigmoid与Softmax的血缘关系">
+             <span id="/2017/04/03/ateacher/" class="leancloud_visitors" data-flag-title="一位老师，一位领导，一个让全体学生考上目标学校的故事">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -356,42 +393,99 @@
       
 
       
-        <h1 id="缘起逻辑回归"><a href="#缘起逻辑回归" class="headerlink" title="缘起逻辑回归"></a>缘起逻辑回归</h1><p>逻辑回归模型是用于二类分类的机器学习模型（不要说逻辑回归可以做多类分类啊喂，那是二类分类器的组合策略问题，而与逻辑回归分类器本身的构造没有半毛钱关系啊）。</p>
+        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">本文摘要：</div><div class="line">其实，这是关于Adaboost的一个故事。。。</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>我们知道，在逻辑回归中，用于预测样本类别的假设函数为</p>
-<p>$$h_{\theta}(x)=sigmoid(\theta\cdot x)$$</p>
-<p>（小夕要讲大事，忽略偏置项参数和向量转置这种细节啦）,其中sigmoid函数的图像看起来是这样的：</p>
-<p><img src="https://ww2.sinaimg.cn/large/006tNc79gy1fe534xd78xj30go09owew.jpg" alt=""></p>
-<p>因此，我们将$h_{\theta}(x)&gt;0.5$的样本预测为正类别（记为类别1），将$h_{\theta}(x)&lt;0.5$的样本预测为负类别（记为类别0）。因此对于sigmoid(z)函数来说，z=0的点就是用来分类的临界点。所以在逻辑回归中，$\theta\cdot x=0$的点就是分类的临界点。</p>
-<p>可是你有想过为什么吗？（是的，这并不是拍脑袋决定的）</p>
-<p>如果觉得小夕的这种问法很奇怪，那小夕换一种问法，你知道$\theta\cdot x$是代表什么意思吗？它难道仅仅代表了“特征向量与模型参数做内积”这么肤浅的含义吗？</p>
-<p>听小夕慢慢讲，手指慢慢划，跟上思路哦。</p>
-<p>首先，模型参数$\theta$是个向量，维数与样本的维数一致（忽略偏置项这种细节问题啦）,为了好看，<strong>下文用w来代替$\theta$</strong>。</p>
-<p>我们来好好看看这个所谓的模型参数w。这个w在本质上是$w_{y=1}-w_{y=0}$，记为$\Delta w$。诶？怎么能这样呢？如何理解被拆出来的这两个w呢？</p>
-<p>其实只要把$w_{y=1}$这个向量看作是对类别1的<strong>直接描述</strong>，将向量$w_{y=1}$看作是对类别0的直接描述，新的大门就打开了。还记得前面小夕讲的，在逻辑回归模型中，本质上用来预测类别的临界点就是$\theta\cdot x$，也就是$w_1\cdot x-w_0\cdot x$，这代表什么意思呢？</p>
-<blockquote>
-<p>我们知道，对于向量a和向量b，假设它们的长度都为1，那么当向量a与向量b夹角最小时，它们的内积，也就是$a\cdot b$会最大。当然了，推广到更一般的说法，不限制a与b的长度，则当a与b夹角最小时，我们称a与b的余弦相似度最大</p>
-</blockquote>
-<p>而两向量的夹角越小意味着什么呢？意味着这两个向量越相似呀，意味着越亲密呀。所以$w_1x-w_0x$就意味着类别1与特征向量x的亲密度减去类别0与x的亲密度。因此当逻辑回归的假设函数$h_\theta(x)&gt;0.5$时，也就是$w\cdot x&gt;0$时，就代表着特征向量x，也就是样本，与类别1更亲密，因此类别预测为1。同样的道理，当x与类别0更亲密时，类别预测为0。</p>
-<p>继续，我们将上述神奇的逻辑放到逻辑回归模型的假设函数$h_\theta(x)$的展开式中，将$\theta$替换为我们上面的$\Delta w$，得：</p>
-<p>$$h_\theta(x)=\frac{e^{\Delta w\cdot x}}{1+e^{\Delta w\cdot x}}$$</p>
-<p>等等，有没有惊恐的发现什么？还记得小夕在上一篇文章《逻辑回归》中得到的这个结论吗？：</p>
-<blockquote>
-<p><img src="https://ww1.sinaimg.cn/large/006tNc79ly1fe56ggqur9j30ku0kw3zu.jpg" alt=""></p>
-</blockquote>
-<p>天呐，逻辑回归的假设函数竟然与P(Y=1|X)一模一样！都是$sigmoid(\Delta w\cdot x)$！！这个sigmoid函数到底是什么？一切真的都是因为巧合吗？不行，小夕非要一探究竟！来，手术刀拿来，解剖！</p>
-<h1 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h1><p>为了美观，我们直接用$w1$代替$w_{y=1}$，用$w0$代替$w_{y=0}$</p>
-<p>$$sigmoid(\Delta w\cdot x)=\frac{e^{\Delta w\cdot x}}{1+e^{\Delta w\cdot x}}=\frac{e^{(w1-w0)\cdot x}}{e^{(w0-w0)\cdot x}+e^{(w1-w0)\cdot x}}$$</p>
-<p>如果我们令分子分母同除以$e^{-w0\cdot x}$。。。得：</p>
-<p>$$sigmoid(\Delta w\cdot x)=\frac{e^{w1\cdot x}}{e^{w0\cdot x}+e^{w1\cdot x}}$$</p>
-<p>！！！有没有被震惊到！小夕在前面讲了，w1与x的内积代表着w1与x的亲密度，这个不就代表着<strong>“类别1与x的亲密度 占 x与所有类别亲密度之和 的比例”</strong>吗？既然是比例，那肯定是0到1之间的数呀~而这个比例又可以解读为什么呢？不就是类别1在x心中的分量吗？当类别1在x心中的分量超过类别0在x心中的分量时，我们的逻辑回归模型当然要把类别1嫁给x呀~也就是将类别1作为预测的类别！同时，这个分量越大，我们将类别1嫁给x后，会让x满意的概率就越大！所以这个比例又是类别1的后验概率P(y=1|x)呀！</p>
-<p>一切都不是巧合吧。Sigmoid函数的意义，竟然如此深邃。等等，虽然sigmoid(w1·x)代表”类别1与x的亲密度占x与所有类别亲密度之和的比例”，但是显然这里只有两个类别，即1和0，也就是说Sigmoid是一个只能用于<strong>二类分类</strong>的函数，那么如果我们要分类的类别超过2，我们能不能同样用一个函数来表示出“某类别与x的亲密度占x与所有类别亲密度之和的比例”呢？</p>
-<h1 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h1><p>这一次，我们倒着来！假如我们的分类任务有k个类别，与前面用w1、w0来表示类别1、类别2一样，我们用w1、w2、w3…wk来表示各个类别。</p>
-<p>根据前面的经验，这个“类别j与特征向量x的亲密度”貌似可以表示为$e^{wj\cdot x}$，那么我们效仿一下sigmoid，类别j与x的亲密度占x与所有类别亲密度之和的比例即:</p>
-<p>$$\frac{e^{wj\cdot x}}{e^{w1\cdot x}+e^{w2\cdot x}+e^{w3\cdot x}+…+e^{wk\cdot x}}$$</p>
-<p>将分母用$\sum$整理一下，发现了没有！这就是大名鼎鼎的Softmax函数：</p>
-<p><img src="https://ww4.sinaimg.cn/large/006tNc79ly1fe57zn7m0zj306n01wwej.jpg" alt=""></p>
-<p>哎，原来看似深不可测的Softmax函数，也就这样啦╮(╯▽╰)╭怪小夕咯？</p>
+<p><u>声明：用于个人学习的转载无需告知，<strong>但请务必在文首注明出处！</strong>微信公众号、微博等平台的<strong>商业转载</strong>请务必联系本文作者<a href="https://xixiaoyao.github.io/about/">夕小瑶</a>。</u></p>
+<p>今天，小夕给大家讲一个故事…</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg" alt=""></p>
+<p>从前，有座山… </p>
+<p>山里，有座学校…</p>
+<p>学校里，有一位老师，一位领导，还有五只可爱的小仙(学)女(生)。 </p>
+<p>这5个学生的名字是：<strong>小兔，小青，小路，小音，小夕</strong>。她们的高考目标依次为<strong>清华、清华、清华、清华、浙大</strong>。但是不管她们的目标如何，在家长的逼迫下：</p>
+<ol>
+<li>假设过了浙大的线，但是没过清华的线，那就上浙大。（所以想考清华的学生会很难过）</li>
+<li>假设如果过了清华的线，那么就必须要上清华，哪怕目标是浙大，也不能报。（所以想考浙大的学生会很难过）</li>
+</ol>
+<p>然而老师的培养目标呢，并不是让所有的学生都上清华，而是让每个学生都达成她们心中的目标！想上浙大的学生，就不能考的太高，以免上了清华。想上清华的学生，就要考的足够高，以免上了浙大。 </p>
+<p> <strong>1. </strong>这个老师很奇怪，他每天会制定一个精力分配计划表，比如老师每天都有100份精力，他要给各个学生分配精力。开学第一天，由于他对这些学生都不熟悉，于是他给这5个学生平均分配精力，即每人都能得到20份精力。</p>
+<p> <strong>2. </strong>这个老师白天怎么上课呢？他会重点关注和培养今天的精力分配计划中那些精力分配很多的学生。他这一天，会讲很多次课，每节课结束的时候呢，都会安排一个随堂考试。并且根据这场考试后各个学生的成绩单，来评价一下这场考试的<strong>成功率</strong>。 </p>
+<p> <strong>2. </strong>但是注意啊，怎么衡量这个考试成不成功呢？重点来啦，这个老师很奇葩！他主要是看<strong>今天重点关注的学生</strong>能不能考上目标学校！比如今天老师的100份精力中，92份给了小夕，剩下的8份平分给了小兔等4人。那么！今天！只要小夕能达成目标（即恰好考上浙大），那么其他4人都没有达成目标也没事(￣∇￣)，这时的考试成功率是92%。但是如果这场考试中小夕没有达成目标（即不小心考上了清华），其他4人都达成了目标（即考上了清华），就认为这场考试的成功率只有8%！（我仿佛听到有人说这个老师是不是智障…）</p>
+<p> <strong>2. </strong>然后呢，按照上面讲的这么不公平的考试结果评价准则，选出今天考的最成功的一场！然后将这一场考试作为今天最终的考试结果，并且彻底忽略掉今天的其他考试。并将这场考试的<strong>考试卷</strong>和<strong>成功率</strong>连夜汇报给上级。 </p>
+<p> <strong>3. </strong>上级是一个夜猫子，而且秉公执法却不做复查的人。于是，他会在明天到来之前，根据今天老师递交的考试结果中的成功率，来给这场考试的考试卷打个<strong>分数</strong>。日后拿出这张考试卷时，看到打的这个分，就知道这场考试卷的含金量是多少啦。</p>
+<p> <strong>4. </strong>老师也不敢睡觉，连夜等待上级给这场考试打的分数。等来上级打的这个分数后，老师赶紧拿着这个<strong>分数</strong>和<strong>今天的精力分配计划表</strong>来制定<strong>明天的精力分配计划表</strong>。 </p>
+<p> <strong>4. </strong>怎么制定呢？上级打的分数决定了精力分配计划表的变动大小，如果上级给打了0分，就意味着计划表不要变动了。上级给打的分数越高，明天的计划表就要改动越大。那么怎么改呢？这时，老师终于开始考虑全体学生了，老师会将今天这场考试中达成目标的学生的精力分配减少（比如今天在小夕身上分配92份精力，小夕达成了目标，那么根据上级的打分，明天分配的精力要降低20%，所以明天给小夕的精力<strong>暂时</strong>记为92<em>(1-0.2)=73.6。），将今天这场考试中未达成目标的学生的精力分配增加（比如今天在小兔身上分配2份精力，那么根据上级的打分，明天分配的精力要增加20%，所以明天给小兔的精力暂时记为2</em>(1+0.2)=2.4。）。</p>
+<p> <strong>4. </strong>然后都算完后，发现明天给各个学生的精力之和不等于100了，那就归一化一下，保证精力之和是100。</p>
+<p> <strong>5. </strong>于是，明天又是崭新的一天。。。除了精力分配计划表改变了以外，其他并没有影响，完全重复前面的过程。</p>
+<p> <strong>5. </strong>就这样过了很多很多天。。。 </p>
+<p> <strong>6. </strong>什么时候结束呢？</p>
+<p> <strong>6. </strong>那就是根据上级对每天的每场考试的打分，来累加每个学生在前面每天的考试结果啦（即加权的考试结果，对于上级打分低的考试，考试结果就不太重要；对于上级打分高的考试，考试结果就很重要）</p>
+<p> <strong>6. </strong>如果有一天，累加每个学生的考试结果后发现，诶？所有学生的<strong>累计</strong>考试结果全都达成了目标！！！即累加起来后，发现学生全都考上了目标学校！！！好了，你们毕业惹~</p>
+<p> <strong>7. </strong>这时，又跑过来一个没有考试目标的学生，叫小好，她问老师，“老师老师，你说我将来会上清华还是浙大呢？”</p>
+<p> <strong>7. </strong>老师：“很简单，你去把这一摞卷子全都做一遍，这是我们的往日考试卷。然后你全做完后，我给你按照上级以前对每张卷子含金量的打分，给你累加一下，得到最终的考试结果。这个最终的考试结果就代表了你将来会上的学校。”</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg" alt=""></p>
+<p> 是的，上面的过程，就是机器学习的AdaBoost算法/分类器。包括了Adaboost的训练过程和分类过程。</p>
+<p> Adaboost是集成机器学习中的典型算法，是Boosting思想的一个具体实现。通过训练并组合很多弱分类器，来加权决定分类结果。</p>
+<p> 怎么把上面的故事转成Adaboost算法呢？完成下面的概念替换：</p>
+<p> 下面映射的是算法中的实体（变量） </p>
+<ul>
+<li>每个有目标的学生 -&gt; 一个训练样本<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image005.png" alt="_{train}"></li>
+</ul>
+<ul>
+<li>没有考试目标的学生 -&gt; 待分类样本<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image007.png" alt="_{test}"></li>
+</ul>
+<ul>
+<li>清华、浙大 -&gt; 本任务的两个类别</li>
+</ul>
+<ul>
+<li>每天的精力分配计划表 -&gt; 每轮迭代的样本权重向量D</li>
+</ul>
+<ul>
+<li>每天选出的成功率最高的考试卷 -&gt; 每轮迭代产生的弱分类器</li>
+</ul>
+<ul>
+<li>老师计算的每场考试的成功率 -&gt; 训练样本集的加权错误率</li>
+</ul>
+<ul>
+<li>上级领导给每个考试卷打的分数 -&gt; 每个弱分类器的决策权重<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image009.png" alt="alpha"></li>
+</ul>
+<ul>
+<li>经过的天数 -&gt; 弱分类器的数量</li>
+</ul>
+<p> 下面映射的是算法中的过程（与故事中每一段前面的序号完全对应）</p>
+<ul>
+<li><ol>
+<li>开学第一天，平均分配精力给每个学生 -&gt; 样本权重向量D的初始化</li>
+</ol>
+</li>
+<li><ol>
+<li>每一天的教学、随堂考试、选出成功率最高的考试过程 -&gt; 本轮迭代中训练弱分类器的过程</li>
+</ol>
+</li>
+<li><ol>
+<li>上级领导给考试卷打分的过程 -&gt; 计算当前这个弱分类器的决策权重<img src="file:////Users/mac/Library/Group%20Containers/UBF8T346G9.Office/msoclip1/01/clip_image010.png" alt="alpha"></li>
+</ol>
+</li>
+<li><ol>
+<li>老师制作明天的精力分配计划表 -&gt; 计算下一轮迭代时的样本权重向量D</li>
+</ol>
+</li>
+<li><ol>
+<li>一天天的过去 -&gt; 不断重复上述步骤2-4.</li>
+</ol>
+</li>
+<li><ol>
+<li>所有学生累计考试结果全都达成目标 -&gt; Adaboost模型收敛，完成训练。    </li>
+</ol>
+</li>
+<li><ol>
+<li>给没目标的小好预测学校 -&gt; 利用训练好的Adaboost分类器预测待分类样本的类别。</li>
+</ol>
+</li>
+</ul>
+<p>听说，写Adaboost的代码的时候，在注释中把小夕讲的这个故事写出来就不会出错了…</p>
+<p><img src="https://ww1.sinaimg.cn/large/006tNbRwly1fe9xd8370dj30va01kaa3.jpg" alt=""></p>
+<p>最后，请手机/电脑/IPAD/投影仪屏幕前正在带学生的老师，请勿模仿本文</p>
+<p> (￣∇￣)</p>
 
       
     </div>
@@ -442,13 +536,9 @@
       
         <div class="post-tags">
           
+            <a href="/tags/Adaboost/" rel="tag"># Adaboost</a>
+          
             <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
-          
-            <a href="/tags/逻辑回归/" rel="tag"># 逻辑回归</a>
-          
-            <a href="/tags/softmax/" rel="tag"># softmax</a>
-          
-            <a href="/tags/sigmoid/" rel="tag"># sigmoid</a>
           
         </div>
       
@@ -461,8 +551,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/31/sigmoid-and-softmax副本 2/" rel="next" title="测试2：深入伸出Sigmoid与Softmax的血缘关系">
-                <i class="fa fa-chevron-left"></i> 测试2：深入伸出Sigmoid与Softmax的血缘关系
+              <a href="/2017/03/31/sigmoid-and-softmax/" rel="next" title="深入深出Sigmoid与Softmax的血缘关系">
+                <i class="fa fa-chevron-left"></i> 深入深出Sigmoid与Softmax的血缘关系
               </a>
             
           </div>
@@ -470,10 +560,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/31/sigmoid-and-softmax/" rel="prev" title="深入深出Sigmoid与Softmax的血缘关系">
-                深入深出Sigmoid与Softmax的血缘关系 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -520,17 +606,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            喵喵喵
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/baobao.png"
@@ -545,12 +622,21 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
           
 
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
           
 
           
@@ -558,7 +644,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -583,22 +669,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#缘起逻辑回归"><span class="nav-number">1.</span> <span class="nav-text">缘起逻辑回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sigmoid"><span class="nav-number">2.</span> <span class="nav-text">Sigmoid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Softmax"><span class="nav-number">3.</span> <span class="nav-text">Softmax</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -634,6 +704,8 @@
     NexT.Muse
   </a>
 </div>
+
+
 
 
         
