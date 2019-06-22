@@ -2,23 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://xixiaoyao.github.io/2019/06/22/hello-world/</loc>
+    
+    <lastmod>2019-06-22T12:17:10.348Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://xixiaoyao.github.io/about/index.html</loc>
     
     <lastmod>2019-05-17T17:13:14.850Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xixiaoyao.github.io/2017/04/03/ateacher/</loc>
-    
-    <lastmod>2017-04-03T16:54:19.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xixiaoyao.github.io/2017/03/31/sigmoid-and-softmax/</loc>
-    
-    <lastmod>2017-04-03T16:52:49.000Z</lastmod>
     
   </url>
   
@@ -33,13 +26,6 @@
     <loc>https://xixiaoyao.github.io/categories/index.html</loc>
     
     <lastmod>2017-03-31T06:32:27.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://xixiaoyao.github.io/2017/03/31/hello-world/</loc>
-    
-    <lastmod>2017-03-31T03:51:59.000Z</lastmod>
     
   </url>
   
